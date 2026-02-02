@@ -1,4 +1,6 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env" });
 import courses from "./courses.2023.json" assert { type: "json" };
 
 type CourseDoc = {
