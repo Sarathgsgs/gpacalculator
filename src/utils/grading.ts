@@ -1,0 +1,92 @@
+import type { Course, Grade, GradeMap, GpaResult, SemesterEntry } from "./types";
+
+export const GRADES: Grade[] = ["O", "A+", "A", "B+", "B", "C", "U"];
+
+export const GRADE_POINTS: Record<Grade, number> = {
+  O: 10,
+  "A+": 9,
+  A: 8,
+  "B+": 7,
+  B: 6,
+  C: 5,
+  U: 0
+};
+
+export function round2(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+export function computeGpa(courses: Course[], grades: GradeMap): GpaResult | null {
+  let totalCredits = 0;
+  let totalPoints = 0;
+  let countedCourses = 0;
+
+  for (const c of courses) {
+    if (!c.isCredit || c.credits <= 0) continue;
+
+    const g = grades[c.courseCode];
+    if (!g) continue; // not graded yet
+
+    const gp = GRADE_POINTS[g];
+    totalCredits += c.credits;
+    totalPoints += c.credits * gp;
+    countedCourses += 1;
+  }
+
+  if (totalCredits <= 0 || countedCourses === 0) return null;
+
+  return {
+    gpa: totalPoints / totalCredits,
+    totalCredits,
+    countedCourses
+  };
+}
+
+/**
+ * Quick CGPA:
+ * (prevCGPA*prevCredits + currentGPA*currentCredits) / (prevCredits + currentCredits)
+ */
+export function computeQuickCgpa(
+  prevCgpa: number,
+  prevCredits: number,
+  currentGpa: number,
+  currentCredits: number
+): number | null {
+  const a = Number(prevCgpa);
+  const b = Number(prevCredits);
+  const c = Number(currentGpa);
+  const d = Number(currentCredits);
+
+  if (![a, b, c, d].every(Number.isFinite)) return null;
+  if (b < 0 || d < 0) return null;
+  if (b + d === 0) return null;
+
+  const total = a * b + c * d;
+  return total / (b + d);
+}
+
+/**
+ * Detailed CGPA from multiple semester entries:
+ * Σ(gpa*credits) / Σ(credits)
+ */
+export function computeDetailedCgpa(entries: SemesterEntry[]): number | null {
+  let totalCredits = 0;
+  let totalPoints = 0;
+
+  for (const e of entries) {
+    if (!Number.isFinite(e.gpa) || !Number.isFinite(e.credits)) return null;
+    if (e.credits < 0) return null;
+
+    totalCredits += e.credits;
+    totalPoints += e.gpa * e.credits;
+  }
+
+  if (totalCredits === 0) return null;
+  return totalPoints / totalCredits;
+}
+
+export function createEmptyGradeMap(courses: Course[]): GradeMap {
+  const map: GradeMap = {};
+  for (const c of courses) map[c.courseCode] = null;
+  return map;
+}
