@@ -12,40 +12,48 @@ export const GRADE_POINTS: Record<Grade, number> = {
   U: 0
 };
 
+// Use integer scaling to avoid float issues with credits like 1.5
+// 1.5 * 2 = 3 (integer) => exact math
+const CREDIT_SCALE = 2;
+
+function toScaledCredits(credits: number): number {
+  // robust rounding for safety
+  return Math.round(credits * CREDIT_SCALE);
+}
+
 export function round2(n: number): number {
-  return Math.round(n * 100) / 100;
+  // fixes cases like 8.749999999 -> 8.75
+  return Number((n + Number.EPSILON).toFixed(2));
 }
 
 export function computeGpa(courses: Course[], grades: GradeMap): GpaResult | null {
-  let totalCredits = 0;
-  let totalPoints = 0;
+  let totalCreditsScaled = 0;
+  let totalPointsScaled = 0;
   let countedCourses = 0;
 
   for (const c of courses) {
     if (!c.isCredit || c.credits <= 0) continue;
 
     const g = grades[c.courseCode];
-    if (!g) continue; // not graded yet
+    if (!g) continue;
 
+    const creditsScaled = toScaledCredits(c.credits);
     const gp = GRADE_POINTS[g];
-    totalCredits += c.credits;
-    totalPoints += c.credits * gp;
+
+    totalCreditsScaled += creditsScaled;
+    totalPointsScaled += creditsScaled * gp;
     countedCourses += 1;
   }
 
-  if (totalCredits <= 0 || countedCourses === 0) return null;
+  if (totalCreditsScaled <= 0 || countedCourses === 0) return null;
 
   return {
-    gpa: totalPoints / totalCredits,
-    totalCredits,
+    gpa: totalPointsScaled / totalCreditsScaled,
+    totalCredits: totalCreditsScaled / CREDIT_SCALE, // original scale for display/info
     countedCourses
   };
 }
 
-/**
- * Quick CGPA:
- * (prevCGPA*prevCredits + currentGPA*currentCredits) / (prevCredits + currentCredits)
- */
 export function computeQuickCgpa(
   prevCgpa: number,
   prevCredits: number,
@@ -61,14 +69,9 @@ export function computeQuickCgpa(
   if (b < 0 || d < 0) return null;
   if (b + d === 0) return null;
 
-  const total = a * b + c * d;
-  return total / (b + d);
+  return (a * b + c * d) / (b + d);
 }
 
-/**
- * Detailed CGPA from multiple semester entries:
- * Σ(gpa*credits) / Σ(credits)
- */
 export function computeDetailedCgpa(entries: SemesterEntry[]): number | null {
   let totalCredits = 0;
   let totalPoints = 0;

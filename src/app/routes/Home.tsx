@@ -2,13 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Disclaimer from "../../components/Disclaimer";
 
-function FeatureCard({
-  title,
-  desc
-}: {
-  title: string;
-  desc: string;
-}) {
+function FeatureCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="rounded-2xl border border-border/70 bg-surface/60 p-5 shadow-glow">
       <h3 className="text-sm font-semibold text-text">{title}</h3>
@@ -27,8 +21,7 @@ export default function Home() {
           </div>
 
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-text md:text-6xl">
-            GPA &amp; CGPA{" "}
-            <span className="text-accent">Calculator</span>
+            GPA &amp; CGPA <span className="text-accent">Calculator</span>
           </h1>
 
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
@@ -49,12 +42,6 @@ export default function Home() {
             >
               Calculate CGPA
             </Link>
-          </div>
-
-          <div className="mt-10 w-full rounded-3xl border border-border/70 bg-panel/40 p-10 shadow-glow">
-            <div className="mx-auto grid h-28 w-28 place-items-center rounded-3xl bg-accent/10 ring-1 ring-accent/20">
-              <span className="text-5xl font-black text-accent">∑</span>
-            </div>
           </div>
         </div>
       </section>

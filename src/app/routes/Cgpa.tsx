@@ -1,6 +1,7 @@
 import React from "react";
 import QuickCgpa from "../../components/QuickCgpa";
 import DetailedCgpa from "../../components/DetailedCgpa";
+import SemesterCreditsReference from "../../components/SemesterCreditsReference";
 import Disclaimer from "../../components/Disclaimer";
 
 export default function Cgpa() {
@@ -17,6 +18,10 @@ export default function Cgpa() {
 
       <div className="mt-8 grid gap-6">
         <QuickCgpa />
+
+        {/* NEW: credits reference under quick CGPA */}
+        <SemesterCreditsReference />
+
         <DetailedCgpa />
       </div>
 

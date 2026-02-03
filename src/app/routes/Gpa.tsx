@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import SemesterSelect from "../../components/SemesterSelect";
 import CourseCardRow from "../../components/CourseCardRow";
 import Disclaimer from "../../components/Disclaimer";
+import GpaResultModal from "../../components/GpaResultModal";
 import type { Course, CoursesApiResponse, GradeMap } from "../../utils/types";
 import { computeGpa, createEmptyGradeMap, round2 } from "../../utils/grading";
 
@@ -14,12 +15,34 @@ function StatPill({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
+function getDisplayRank(c: Course): number {
+  const type = (c.type || "").toLowerCase().trim();
+  const isNonCredit = !c.isCredit || c.credits <= 0;
+  if (isNonCredit) return 100; // always last
+
+  const isLab = type.includes("lab");
+  if (isLab) return 90; // labs near bottom (but before non-credit)
+
+  // Main subject order (top to bottom)
+  if (type.includes("theory")) return 0;
+  if (type.includes("core")) return 1;
+  if (type.includes("internship")) return 2;
+  if (type.includes("skill")) return 3;
+  if (type.includes("value added")) return 4;
+
+  return 5; // other credit types
+}
+
 export default function Gpa() {
   const [semester, setSemester] = useState<number>(5);
   const [loading, setLoading] = useState<boolean>(false);
   const [courses, setCourses] = useState<Course[]>([]);
   const [grades, setGrades] = useState<GradeMap>({});
   const [computed, setComputed] = useState<number | null>(null);
+
+  // modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalGpa, setModalGpa] = useState<number>(0);
 
   const creditCourses = useMemo(
     () => courses.filter((c) => c.isCredit && c.credits > 0),
@@ -32,7 +55,18 @@ export default function Gpa() {
 
   const totalCreditCount = creditCourses.length;
 
-  const canCalculate = gradedCreditCount > 0; // you can make it require all graded if you want
+  // Require ALL CREDIT courses graded before enabling calculate
+  const canCalculate = totalCreditCount > 0 && gradedCreditCount === totalCreditCount;
+
+  // Sorted list for display
+  const displayCourses = useMemo(() => {
+    return [...courses].sort((a, b) => {
+      const ra = getDisplayRank(a);
+      const rb = getDisplayRank(b);
+      if (ra !== rb) return ra - rb;
+      return a.courseCode.localeCompare(b.courseCode);
+    });
+  }, [courses]);
 
   useEffect(() => {
     let cancelled = false;
@@ -40,6 +74,7 @@ export default function Gpa() {
     async function load() {
       setLoading(true);
       setComputed(null);
+      setModalOpen(false);
 
       try {
         const res = await fetch(`/api/courses?semester=${semester}`, {
@@ -72,12 +107,14 @@ export default function Gpa() {
 
   const onGradeChange = (courseCode: string, grade: any) => {
     setGrades((prev) => ({ ...prev, [courseCode]: grade }));
-    setComputed(null); // force explicit calculate button as per PRD
+    setComputed(null);
+    setModalOpen(false);
   };
 
   const onReset = () => {
     setGrades(createEmptyGradeMap(courses));
     setComputed(null);
+    setModalOpen(false);
   };
 
   const onCalculate = () => {
@@ -86,7 +123,12 @@ export default function Gpa() {
       setComputed(null);
       return;
     }
-    setComputed(round2(result.gpa));
+
+    const gpaRounded = round2(result.gpa);
+    setComputed(gpaRounded);
+
+    setModalGpa(result.gpa);
+    setModalOpen(true);
   };
 
   return (
@@ -105,7 +147,10 @@ export default function Gpa() {
       </div>
 
       <div className="mt-6 grid gap-3 md:grid-cols-3">
-        <StatPill label="SUBJECTS GRADED (CREDIT)" value={`${gradedCreditCount} / ${totalCreditCount}`} />
+        <StatPill
+          label="SUBJECTS GRADED (CREDIT)"
+          value={`${gradedCreditCount} / ${totalCreditCount}`}
+        />
         <StatPill
           label="CALCULATED GPA"
           value={
@@ -118,11 +163,41 @@ export default function Gpa() {
         />
         <StatPill
           label="NOTE"
-          value={<span className="text-muted">Non-credit grades are recorded but excluded from GPA.</span>}
+          value={
+            <span className="text-muted">
+              Non-credit grades are recorded but excluded from GPA.
+            </span>
+          }
         />
       </div>
 
-      <div className="mt-6 flex items-center justify-end gap-3">
+      {/* Course List */}
+      <div className="mt-6 grid gap-3">
+        {loading && (
+          <div className="rounded-2xl border border-border/70 bg-surface/60 p-6 text-sm text-muted">
+            Loading semester {semester} courses…
+          </div>
+        )}
+
+        {!loading && courses.length === 0 && (
+          <div className="rounded-2xl border border-border/70 bg-surface/60 p-6 text-sm text-muted">
+            No courses found for semester {semester}.
+          </div>
+        )}
+
+        {!loading &&
+          displayCourses.map((c) => (
+            <CourseCardRow
+              key={`${c.semester}-${c.courseCode}`}
+              course={c}
+              grade={grades[c.courseCode] ?? null}
+              onGradeChange={onGradeChange}
+            />
+          ))}
+      </div>
+
+      {/* Actions moved to LAST */}
+      <div className="mt-8 flex items-center justify-end gap-3">
         <button
           type="button"
           onClick={onReset}
@@ -141,36 +216,20 @@ export default function Gpa() {
               ? "bg-accent text-bg hover:brightness-110"
               : "cursor-not-allowed bg-white/10 text-muted"
           ].join(" ")}
+          title={!canCalculate ? "Select grades for all credit courses to calculate GPA." : ""}
         >
           Calculate GPA
         </button>
       </div>
 
-      <div className="mt-6 grid gap-3">
-        {loading && (
-          <div className="rounded-2xl border border-border/70 bg-surface/60 p-6 text-sm text-muted">
-            Loading semester {semester} courses…
-          </div>
-        )}
-
-        {!loading && courses.length === 0 && (
-          <div className="rounded-2xl border border-border/70 bg-surface/60 p-6 text-sm text-muted">
-            No courses found for semester {semester}.
-          </div>
-        )}
-
-        {!loading &&
-          courses.map((c) => (
-            <CourseCardRow
-              key={`${c.semester}-${c.courseCode}`}
-              course={c}
-              grade={grades[c.courseCode] ?? null}
-              onGradeChange={onGradeChange}
-            />
-          ))}
-      </div>
-
       <Disclaimer />
+
+      <GpaResultModal
+        open={modalOpen}
+        gpa={modalGpa}
+        onClose={() => setModalOpen(false)}
+        onRecalculate={() => setModalOpen(false)}
+      />
     </div>
   );
 }

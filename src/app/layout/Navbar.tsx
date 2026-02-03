@@ -27,7 +27,7 @@ export default function Navbar() {
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent/15 ring-1 ring-accent/20">
             <span className="text-accent font-semibold">A</span>
           </span>
-          <span className="text-sm font-semibold tracking-wide">GPA/CGPA CALC</span>
+          <span className="text-sm font-semibold tracking-wide">GPA/CGPA CALCULATOR</span>
         </Link>
 
         <nav className="hidden items-center gap-2 md:flex">

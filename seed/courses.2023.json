@@ -1,71 +1,542 @@
 [
-  { "regulation": "2023", "semester": 1, "courseCode": "23EN1101", "courseTitle": "Professional English", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23MA1201", "courseTitle": "Calculus and its Applications", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23CH1201", "courseTitle": "Chemistry for Information Science", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23CS1301", "courseTitle": "Problem Solving using C Programming", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23CH1L01", "courseTitle": "Chemistry Laboratory for Information Science", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23CS1L01", "courseTitle": "Problem Solving using C Programming Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23PL1001", "courseTitle": "Product Development Lab I", "credits": 1, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23GE1101", "courseTitle": "Heritage of Tamils", "credits": 1, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 1, "courseCode": "23MC1002", "courseTitle": "Gender Equity", "credits": 0, "type": "Non-Credit", "isCredit": false },
-
-  { "regulation": "2023", "semester": 2, "courseCode": "23GE1102", "courseTitle": "Sensitisation to Universal Human Values", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23MA2201", "courseTitle": "Probability and Statistics for Data Analysis", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23PH1205", "courseTitle": "Physics for Information Science", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23CS2301", "courseTitle": "Python Programming", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23EC2302", "courseTitle": "Digital Principles and Computer Organization", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23PH1L05", "courseTitle": "Physics Laboratory for Information Science", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23CS2L01", "courseTitle": "Python Programming Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23PL2002", "courseTitle": "Product Development Lab II", "credits": 1, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23GE2101", "courseTitle": "Tamils and Technology", "credits": 1, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 2, "courseCode": "23MC2001", "courseTitle": "Environmental Science and Sustainability", "credits": 0, "type": "Non-Credit", "isCredit": false },
-
-  { "regulation": "2023", "semester": 3, "courseCode": "23MA3201", "courseTitle": "Mathematical Structures and its Applications", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3301", "courseTitle": "Fundamentals of IoT", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3401", "courseTitle": "Object Oriented Programming", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3402", "courseTitle": "Database Management Systems", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3403", "courseTitle": "Data Structures", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3L01", "courseTitle": "Object Oriented Programming Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3L02", "courseTitle": "Database Management Systems Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23CS3L03", "courseTitle": "Data Structures Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23EN3L01", "courseTitle": "English Language Training", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23PL3003", "courseTitle": "Product Development Laboratory III", "credits": 1, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23SD3XXX", "courseTitle": "Analytical Skills I", "credits": 2, "type": "Skill", "isCredit": true },
-  { "regulation": "2023", "semester": 3, "courseCode": "23VA1T01", "courseTitle": "CCNA – Introduction to Networking", "credits": 1, "type": "Value Added", "isCredit": true },
-
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4401", "courseTitle": "Operating Systems", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4402", "courseTitle": "Web Technology", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4403", "courseTitle": "Design and Analysis of Algorithms", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4404", "courseTitle": "Fundamentals of AI", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4405", "courseTitle": "Computer Networks", "credits": 4, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4L01", "courseTitle": "Operating Systems and Algorithms Laboratory", "credits": 1, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23CS4L02", "courseTitle": "Web Technology Laboratory", "credits": 1, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23SD4XXX", "courseTitle": "Analytical Skills II", "credits": 2, "type": "Skill", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23PL4004", "courseTitle": "Product Development Laboratory IV", "credits": 2, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 4, "courseCode": "23IN4XXX", "courseTitle": "Internship", "credits": 1, "type": "Internship", "isCredit": true },
-
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5401", "courseTitle": "Software Engineering", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5402", "courseTitle": "Machine Learning", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5403", "courseTitle": "Cryptography and Network Security Principles", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5404", "courseTitle": "Theory of Computation", "credits": 4, "type": "Core", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5405", "courseTitle": "Computer Graphics", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CH5602", "courseTitle": "Environment and Agriculture", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5L01", "courseTitle": "Software Engineering Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23CS5L02", "courseTitle": "Machine Learning Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "23SD5XXX", "courseTitle": "Career Skills Development I", "credits": 2, "type": "Skill", "isCredit": true },
-  { "regulation": "2023", "semester": 5, "courseCode": "COMM", "courseTitle": "Communication Skills", "credits": 0, "type": "Non-Credit", "isCredit": false },
-  { "regulation": "2023", "semester": 5, "courseCode": "PET", "courseTitle": "Physical Education Training", "credits": 0, "type": "Non-Credit", "isCredit": false },
-  { "regulation": "2023", "semester": 5, "courseCode": "LIB", "courseTitle": "Library", "credits": 0, "type": "Non-Credit", "isCredit": false },
-
-  { "regulation": "2023", "semester": 6, "courseCode": "23PM6101", "courseTitle": "Digital Transformation of Business and Services", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CS6401", "courseTitle": "Compiler Design", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CSX502", "courseTitle": "Deep Learning and Neural Networks", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CSX503", "courseTitle": "Natural Language Processing Fundamentals", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CSX507", "courseTitle": "Cloud Computing and Virtualization", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CH6603", "courseTitle": "Water and Soil Conservation", "credits": 3, "type": "Theory", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23CS6L01", "courseTitle": "Compiler Design Laboratory", "credits": 1.5, "type": "Lab", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "23SD6XXX", "courseTitle": "Career Skills Development II", "credits": 1, "type": "Skill", "isCredit": true },
-  { "regulation": "2023", "semester": 6, "courseCode": "COMM", "courseTitle": "Communication Skills", "credits": 0, "type": "Non-Credit", "isCredit": false },
-  { "regulation": "2023", "semester": 6, "courseCode": "PET", "courseTitle": "Physical Activities", "credits": 0, "type": "Non-Credit", "isCredit": false },
-  { "regulation": "2023", "semester": 6, "courseCode": "LIB", "courseTitle": "Library", "credits": 0, "type": "Non-Credit", "isCredit": false }
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23EN1101",
+    "courseTitle": "Professional English",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23MA1201",
+    "courseTitle": "Calculus and its Applications",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23CH1201",
+    "courseTitle": "Chemistry for Information Science",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23CS1301",
+    "courseTitle": "Problem Solving using C Programming",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23CH1L01",
+    "courseTitle": "Chemistry Laboratory for Information Science",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23CS1L01",
+    "courseTitle": "Problem Solving using C Programming Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23PL1001",
+    "courseTitle": "Product Development Lab I",
+    "credits": 1,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23GE1101",
+    "courseTitle": "Heritage of Tamils",
+    "credits": 1,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 1,
+    "courseCode": "23MC1002",
+    "courseTitle": "Gender Equity",
+    "credits": 0,
+    "type": "Non-Credit",
+    "isCredit": false
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23GE1102",
+    "courseTitle": "Sensitisation to Universal Human Values",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23MA2201",
+    "courseTitle": "Probability and Statistics for Data Analysis",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23PH1205",
+    "courseTitle": "Physics for Information Science",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23CS2301",
+    "courseTitle": "Python Programming",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23EC2302",
+    "courseTitle": "Digital Principles and Computer Organization",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23PH1L05",
+    "courseTitle": "Physics Laboratory for Information Science",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23CS2L01",
+    "courseTitle": "Python Programming Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23PL2002",
+    "courseTitle": "Product Development Lab II",
+    "credits": 1,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23GE2101",
+    "courseTitle": "Tamils and Technology",
+    "credits": 1,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 2,
+    "courseCode": "23MC2001",
+    "courseTitle": "Environmental Science and Sustainability",
+    "credits": 0,
+    "type": "Non-Credit",
+    "isCredit": false
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23MA3201",
+    "courseTitle": "Mathematical Structures and its Applications",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3301",
+    "courseTitle": "Fundamentals of IoT",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3401",
+    "courseTitle": "Object Oriented Programming",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3402",
+    "courseTitle": "Database Management Systems",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3403",
+    "courseTitle": "Data Structures",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3L01",
+    "courseTitle": "Object Oriented Programming Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3L02",
+    "courseTitle": "Database Management Systems Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23CS3L03",
+    "courseTitle": "Data Structures Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23EN3L01",
+    "courseTitle": "English Language Training",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23PL3003",
+    "courseTitle": "Product Development Laboratory III",
+    "credits": 1,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23SD3XXX",
+    "courseTitle": "Analytical Skills I",
+    "credits": 1,
+    "type": "Skill",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 3,
+    "courseCode": "23VA1T01",
+    "courseTitle": "CCNA – Introduction to Networking",
+    "credits": 1,
+    "type": "Value Added",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4401",
+    "courseTitle": "Operating Systems",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4402",
+    "courseTitle": "Web Technology",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4403",
+    "courseTitle": "Design and Analysis of Algorithms",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4404",
+    "courseTitle": "Fundamentals of AI",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4405",
+    "courseTitle": "Computer Networks",
+    "credits": 4,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4L01",
+    "courseTitle": "Operating Systems and Algorithms Laboratory",
+    "credits": 1,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23CS4L02",
+    "courseTitle": "Web Technology Laboratory",
+    "credits": 1,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23SD4XXX",
+    "courseTitle": "Analytical Skills II",
+    "credits": 1,
+    "type": "Skill",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23PL4004",
+    "courseTitle": "Product Development Laboratory IV",
+    "credits": 2,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 4,
+    "courseCode": "23IN4XXX",
+    "courseTitle": "Internship",
+    "credits": 1,
+    "type": "Internship",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5401",
+    "courseTitle": "Software Engineering",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5402",
+    "courseTitle": "Machine Learning",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5403",
+    "courseTitle": "Cryptography and Network Security Principles",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5404",
+    "courseTitle": "Theory of Computation",
+    "credits": 4,
+    "type": "Core",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5405",
+    "courseTitle": "Computer Graphics",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CH5602",
+    "courseTitle": "Environment and Agriculture",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5L01",
+    "courseTitle": "Software Engineering Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23CS5L02",
+    "courseTitle": "Machine Learning Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "23SD5XXX",
+    "courseTitle": "Career Skills Development I",
+    "credits": 2,
+    "type": "Skill",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 5,
+    "courseCode": "COMM",
+    "courseTitle": "Communication Skills",
+    "credits": 0,
+    "type": "Non-Credit",
+    "isCredit": false
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23PM6101",
+    "courseTitle": "Digital Transformation of Business and Services",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CS6401",
+    "courseTitle": "Compiler Design",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CSX502",
+    "courseTitle": "Deep Learning and Neural Networks",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CSX503",
+    "courseTitle": "Natural Language Processing Fundamentals",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CSX507",
+    "courseTitle": "Cloud Computing and Virtualization",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CH6603",
+    "courseTitle": "Water and Soil Conservation",
+    "credits": 3,
+    "type": "Theory",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23CS6L01",
+    "courseTitle": "Compiler Design Laboratory",
+    "credits": 1.5,
+    "type": "Lab",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "23SD6XXX",
+    "courseTitle": "Career Skills Development II",
+    "credits": 1,
+    "type": "Skill",
+    "isCredit": true
+  },
+  {
+    "regulation": "2023",
+    "semester": 6,
+    "courseCode": "COMM",
+    "courseTitle": "Communication Skills",
+    "credits": 0,
+    "type": "Non-Credit",
+    "isCredit": false
+  }
 ]
