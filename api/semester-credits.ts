@@ -19,7 +19,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         try {
             // Create a timeout promise to fail fast if DB is hanging
             const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error("Database connection timed out")), 2000)
+                setTimeout(() => {
+                    console.error("DB Connection timed out after 10s");
+                    reject(new Error("Database connection timed out"));
+                }, 10000)
             );
 
             const dbRows = await Promise.race([
@@ -54,7 +57,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             }));
 
         } catch (dbErr) {
-            console.warn("Database error in semester-credits, using fallback:", dbErr);
+            console.warn("Database error in semester-credits (using fallback JSON):", dbErr);
 
             // Calculate from JSON
             const map = new Map<number, number>();
