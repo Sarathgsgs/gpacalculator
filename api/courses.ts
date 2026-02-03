@@ -25,7 +25,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       // Create a timeout promise
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Database connection timed out")), 2000)
+        setTimeout(() => {
+          console.error("Courses API DB Connection timed out after 10s");
+          reject(new Error("Database connection timed out"));
+        }, 10000)
       );
 
       // Race database operation against timeout
