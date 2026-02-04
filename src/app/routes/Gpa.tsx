@@ -15,24 +15,6 @@ function StatPill({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-function getDisplayRank(c: Course): number {
-  const type = (c.type || "").toLowerCase().trim();
-  const isNonCredit = !c.isCredit || c.credits <= 0;
-  if (isNonCredit) return 100; // always last
-
-  const isLab = type.includes("lab");
-  if (isLab) return 90; // labs near bottom (but before non-credit)
-
-  // Main subject order (top to bottom)
-  if (type.includes("theory")) return 0;
-  if (type.includes("core")) return 1;
-  if (type.includes("internship")) return 2;
-  if (type.includes("skill")) return 3;
-  if (type.includes("value added")) return 4;
-
-  return 5; // other credit types
-}
-
 export default function Gpa() {
   const [semester, setSemester] = useState<number>(5);
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,12 +40,14 @@ export default function Gpa() {
   // Require ALL CREDIT courses graded before enabling calculate
   const canCalculate = totalCreditCount > 0 && gradedCreditCount === totalCreditCount;
 
-  // Sorted list for display
+  // Sorted list for display - by credits (high to low), then by course code
   const displayCourses = useMemo(() => {
     return [...courses].sort((a, b) => {
-      const ra = getDisplayRank(a);
-      const rb = getDisplayRank(b);
-      if (ra !== rb) return ra - rb;
+      // Sort by credits descending (highest first)
+      if (a.credits !== b.credits) {
+        return b.credits - a.credits;
+      }
+      // Secondary sort by course code
       return a.courseCode.localeCompare(b.courseCode);
     });
   }, [courses]);
