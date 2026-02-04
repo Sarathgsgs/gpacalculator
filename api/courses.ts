@@ -1,13 +1,15 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getDb } from "../lib/mongodb";
+import fs from "fs";
+import path from "path";
 
 const REGULATION = "2023";
 
-// Fallback data
-// @ts-ignore
-import coursesData from "../seed/courses.2023.json";
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log("DEBUG: courses.ts handler starting", {
+    semester: req.query.semester
+  });
+
   try {
     if (req.method !== "GET") {
       res.setHeader("Allow", "GET");
@@ -23,15 +25,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     let courses = [];
     try {
-      // Create a timeout promise
+      if (!process.env.MONGODB_URI) {
+        throw new Error("No MONGODB_URI");
+      }
+
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => {
-          console.error("Courses API DB Connection timed out after 10s");
-          reject(new Error("Database connection timed out"));
-        }, 10000)
+        setTimeout(() => reject(new Error("DB Timeout")), 3000)
       );
 
-      // Race database operation against timeout
       courses = await Promise.race([
         (async () => {
           const db = await getDb();
@@ -43,34 +44,43 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             .toArray();
         })(),
         timeoutPromise
-      ]) as any[]; // Cast to match expected type
+      ]) as any[];
 
     } catch (dbErr) {
-      console.warn("Database connection specific error:", dbErr);
-      console.warn("Using fallback JSON data.");
+      console.warn("DB failed, using FS fallback:", dbErr.message);
 
-      // Fallback logic
-      courses = coursesData.filter((c: any) => c.regulation === REGULATION && c.semester === semester);
+      try {
+        // Absolute path for local dev, relative for Vercel? 
+        // Vercel serverless functions usually have the root at /var/task
+        const jsonPath = path.join(process.cwd(), "seed", "courses.2023.json");
+        const fileContent = fs.readFileSync(jsonPath, "utf8");
+        const allCourses = JSON.parse(fileContent);
 
-      // Sort to match DB query: isCredit: -1 (desc), courseCode: 1 (asc)
-      courses.sort((a: any, b: any) => {
-        if (a.isCredit !== b.isCredit) {
-          return (b.isCredit ? 1 : 0) - (a.isCredit ? 1 : 0);
-        }
-        return a.courseCode.localeCompare(b.courseCode);
-      });
+        courses = allCourses.filter((c: any) =>
+          c.regulation === REGULATION && Number(c.semester) === semester
+        );
+
+        console.log(`DEBUG: Filtered ${courses.length} courses from FS`);
+      } catch (fsErr) {
+        console.error("FS fallback also failed:", fsErr);
+        courses = [];
+      }
     }
 
-    // Cache to reduce load on result day
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
+    // Sort as a final safety step
+    courses.sort((a: any, b: any) => {
+      if (a.isCredit !== b.isCredit) return (b.isCredit ? 1 : 0) - (a.isCredit ? 1 : 0);
+      return (a.courseCode || "").localeCompare(b.courseCode || "");
+    });
 
+    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
     return res.status(200).json({
       regulation: REGULATION,
       semester,
-      courses
+      courses: courses || []
     });
   } catch (err) {
-    console.error("Critical error in courses handler:", err);
+    console.error("Critical API Error:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 }

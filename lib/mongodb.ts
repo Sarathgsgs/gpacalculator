@@ -1,12 +1,5 @@
 import { Db, MongoClient } from "mongodb";
 
-function requireEnv(name: string): string {
-  const v = process.env[name];
-  if (!v) throw new Error(`Missing ${name} env var`);
-  return v;
-}
-
-const uri = requireEnv("MONGODB_URI");
 const dbName = process.env.MONGODB_DB || "academiacalc";
 
 type GlobalMongoCache = {
@@ -17,6 +10,11 @@ const globalForMongo = globalThis as typeof globalThis & { __mongo?: GlobalMongo
 globalForMongo.__mongo ??= {};
 
 async function getClient(): Promise<MongoClient> {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("MONGODB_URI env var is not defined");
+  }
+
   const cache = globalForMongo.__mongo!;
 
   if (!cache.clientPromise) {

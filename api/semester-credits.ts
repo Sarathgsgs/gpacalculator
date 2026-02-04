@@ -1,13 +1,12 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getDb } from "../lib/mongodb";
+import fs from "fs";
+import path from "path";
 
 const REGULATION = "2023";
 
-// Fallback data
-// @ts-ignore
-import coursesData from "../seed/courses.2023.json";
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+    console.log("DEBUG: semester-credits.ts handler starting");
     try {
         if (req.method !== "GET") {
             res.setHeader("Allow", "GET");
@@ -17,12 +16,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         let semesters = [];
 
         try {
-            // Create a timeout promise to fail fast if DB is hanging
+            if (!process.env.MONGODB_URI) {
+                throw new Error("No MONGODB_URI");
+            }
+
             const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => {
-                    console.error("DB Connection timed out after 10s");
-                    reject(new Error("Database connection timed out"));
-                }, 10000)
+                setTimeout(() => reject(new Error("DB Timeout")), 3000)
             );
 
             const dbRows = await Promise.race([
@@ -57,28 +56,36 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             }));
 
         } catch (dbErr) {
-            console.warn("Database error in semester-credits (using fallback JSON):", dbErr);
+            console.warn("DB failed in semester-credits, using FS fallback:", dbErr.message);
 
-            // Calculate from JSON
-            const map = new Map<number, number>();
-            const data = coursesData as any[];
+            try {
+                const jsonPath = path.join(process.cwd(), "seed", "courses.2023.json");
+                const fileContent = fs.readFileSync(jsonPath, "utf8");
+                const allCourses = JSON.parse(fileContent);
 
-            for (const c of data) {
-                if (c.regulation === REGULATION && c.isCredit && c.credits > 0) {
-                    const soFar = map.get(c.semester) || 0;
-                    map.set(c.semester, soFar + c.credits);
+                const map = new Map<number, number>();
+                for (const c of allCourses) {
+                    if (c.regulation === REGULATION && c.isCredit && c.credits > 0) {
+                        const s = Number(c.semester);
+                        map.set(s, (map.get(s) || 0) + c.credits);
+                    }
                 }
-            }
 
-            semesters = Array.from(map.entries())
-                .map(([sem, credits]) => ({ semester: sem, totalCredits: credits }))
-                .sort((a, b) => a.semester - b.semester);
+                semesters = Array.from(map.entries())
+                    .map(([sem, credits]) => ({ semester: sem, totalCredits: credits }))
+                    .sort((a, b) => a.semester - b.semester);
+
+                console.log(`DEBUG: Found ${semesters.length} semesters from FS`);
+            } catch (fsErr) {
+                console.error("FS fallback failed for semester-credits:", fsErr);
+                semesters = [];
+            }
         }
 
         res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
         return res.status(200).json({ regulation: REGULATION, semesters });
     } catch (err) {
-        console.error(err);
+        console.error("Critical API Error (credits):", err);
         return res.status(500).json({ error: "Internal server error" });
     }
 }
