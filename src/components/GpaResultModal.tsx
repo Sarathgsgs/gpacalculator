@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { round2 } from "../utils/grading";
+import { round2 } from "../utils/grading.js";
 
 function performanceMeta(gpa: number) {
     if (gpa >= 9) {

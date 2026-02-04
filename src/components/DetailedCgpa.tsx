@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import type { SemesterEntry } from "../utils/types";
-import { computeDetailedCgpa, round2 } from "../utils/grading";
+import type { SemesterEntry } from "../utils/types.js";
+import { computeDetailedCgpa, round2 } from "../utils/grading.js";
 
 function NumberField({
   label,

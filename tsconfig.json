@@ -3,20 +3,16 @@
     "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "jsx": "react-jsx",
-
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-
+    "jsx": "react-jsx",
     "skipLibCheck": true,
     "strict": true,
-
-    "types": ["vite/client", "node"]
+    "types": ["vite/client"]
   },
-  "include": ["src", "api", "lib", "seed"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import SemesterSelect from "../../components/SemesterSelect";
-import CourseCardRow from "../../components/CourseCardRow";
-import Disclaimer from "../../components/Disclaimer";
-import GpaResultModal from "../../components/GpaResultModal";
-import type { Course, CoursesApiResponse, GradeMap } from "../../utils/types";
-import { computeGpa, createEmptyGradeMap, round2 } from "../../utils/grading";
+import SemesterSelect from "../../components/SemesterSelect.js";
+import CourseCardRow from "../../components/CourseCardRow.js";
+import Disclaimer from "../../components/Disclaimer.js";
+import GpaResultModal from "../../components/GpaResultModal.js";
+import type { Course, CoursesApiResponse, GradeMap } from "../../utils/types.js";
+import { computeGpa, createEmptyGradeMap, round2 } from "../../utils/grading.js";
 
 function StatPill({ label, value }: { label: string; value: React.ReactNode }) {
   return (
@@ -106,7 +106,7 @@ export default function Gpa() {
   }, [semester]);
 
   const onGradeChange = (courseCode: string, grade: any) => {
-    setGrades((prev) => ({ ...prev, [courseCode]: grade }));
+    setGrades((prev: GradeMap) => ({ ...prev, [courseCode]: grade }));
     setComputed(null);
     setModalOpen(false);
   };

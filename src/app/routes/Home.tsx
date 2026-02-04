@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Disclaimer from "../../components/Disclaimer";
+import Disclaimer from "../../components/Disclaimer.js";
 
 function FeatureCard({ title, desc }: { title: string; desc: string }) {
   return (

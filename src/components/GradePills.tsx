@@ -1,6 +1,6 @@
 import React from "react";
-import type { Grade } from "../utils/types";
-import { GRADES } from "../utils/grading";
+import type { Grade } from "../utils/types.js";
+import { GRADES } from "../utils/grading.js";
 
 export default function GradePills({
   value,
@@ -20,7 +20,7 @@ export default function GradePills({
         disabled ? "opacity-60" : ""
       ].join(" ")}
     >
-      {GRADES.map((g) => {
+      {GRADES.map((g: Grade) => {
         const selected = value === g;
         return (
           <button

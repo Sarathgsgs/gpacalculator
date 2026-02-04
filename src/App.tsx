@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import Home from "./app/routes/Home";
-import Gpa from "./app/routes/Gpa";
-import Cgpa from "./app/routes/Cgpa";
-import Navbar from "./app/layout/Navbar";
-import Footer from "./app/layout/Footer";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import Home from "./app/routes/Home.js";
+import Gpa from "./app/routes/Gpa.js";
+import Cgpa from "./app/routes/Cgpa.js";
+import Navbar from "./app/layout/Navbar.js";
+import Footer from "./app/layout/Footer.js";
+import { ErrorBoundary } from "./components/ErrorBoundary.js";
 
 export default function App() {
   return (

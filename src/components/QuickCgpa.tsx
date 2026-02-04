@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { computeQuickCgpa, round2 } from "../utils/grading";
+import { computeQuickCgpa, round2 } from "../utils/grading.js";
 
 function Field({
   label,

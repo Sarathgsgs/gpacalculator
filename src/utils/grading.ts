@@ -1,4 +1,4 @@
-import type { Course, Grade, GradeMap, GpaResult, SemesterEntry } from "./types";
+import type { Course, Grade, GradeMap, GpaResult, SemesterEntry } from "./types.js";
 
 export const GRADES: Grade[] = ["O", "A+", "A", "B+", "B", "C", "U"];
 

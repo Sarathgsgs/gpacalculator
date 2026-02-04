@@ -1,8 +1,8 @@
 import React from "react";
-import QuickCgpa from "../../components/QuickCgpa";
-import DetailedCgpa from "../../components/DetailedCgpa";
-import SemesterCreditsReference from "../../components/SemesterCreditsReference";
-import Disclaimer from "../../components/Disclaimer";
+import QuickCgpa from "../../components/QuickCgpa.js";
+import DetailedCgpa from "../../components/DetailedCgpa.js";
+import SemesterCreditsReference from "../../components/SemesterCreditsReference.js";
+import Disclaimer from "../../components/Disclaimer.js";
 
 export default function Cgpa() {
   return (

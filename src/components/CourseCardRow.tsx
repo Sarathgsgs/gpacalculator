@@ -1,6 +1,6 @@
 import React from "react";
-import type { Course, Grade } from "../utils/types";
-import GradePills from "./GradePills";
+import type { Course, Grade } from "../utils/types.js";
+import GradePills from "./GradePills.js";
 
 export default function CourseCardRow({
   course,
@@ -47,7 +47,7 @@ export default function CourseCardRow({
 
         <div className="md:shrink-0">
           {/* Non-credit still has grade (per your rule), so we DO NOT disable pills. */}
-          <GradePills value={grade} onChange={(g) => onGradeChange(course.courseCode, g)} />
+          <GradePills value={grade} onChange={(g: Grade) => onGradeChange(course.courseCode, g)} />
         </div>
       </div>
     </div>
