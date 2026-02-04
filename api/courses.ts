@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         timeoutPromise
       ]) as any[];
 
-    } catch (dbErr) {
+    } catch (dbErr: any) {
       console.warn("DB failed, using FS fallback:", dbErr.message);
 
       try {

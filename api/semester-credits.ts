@@ -13,7 +13,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             return res.status(405).json({ error: "Method not allowed" });
         }
 
-        let semesters = [];
+        let semesters: any[] = [];
 
         try {
             if (!process.env.MONGODB_URI) {
@@ -55,7 +55,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 totalCredits: r.totalCredits as number
             }));
 
-        } catch (dbErr) {
+        } catch (dbErr: any) {
             console.warn("DB failed in semester-credits, using FS fallback:", dbErr.message);
 
             try {
