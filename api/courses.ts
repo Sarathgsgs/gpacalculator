@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getDb } from "../lib/mongodb";
-import { coursesData } from "../seed/courses.2023.data";
+import { getDb } from "../lib/mongodb.js";
+import { coursesData } from "../seed/courses.2023.data.js";
 
 const REGULATION = "2023";
 
