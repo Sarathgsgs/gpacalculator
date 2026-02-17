@@ -1,0 +1,2 @@
+﻿scripts/reproduce-ocr.ts(3,8): error TS1192: Module '"fs"' has no default export.
+scripts/reproduce-ocr.ts(4,8): error TS1259: Module '"path"' can only be default-imported using the 'esModuleInterop' flag

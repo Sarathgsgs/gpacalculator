@@ -1,0 +1,28 @@
+﻿Starting OCR on: C:/Users/GOKUL GNANAVELU/.gemini/antigravity/brain/498c760b-f57f-4e44-b193-320ef6f59e4a/uploaded_media_0_1770908247533.jpg
+
+--- OCR RAW OUTPUT START ---
+SLNo Sem Subject Code Subject Name Grade Status
+[0 [a | ocuor openamgswems Aas |
+5 [4 | o3csu05 | Design and analysis of Algorithms | b+ | ass |
+Ca [4 | cub | Pundmenasor | a | mas |
+6 [4 | 23c54101 | Operating systems and Algorithms Laboratory | b+ | PASS |
+CN I C0 7
+5 [4 | 25PLa00s | Product Development taborstory NV | A | ASS |
+C0 [a | zee (memhp a | ms |
+
+--- OCR RAW OUTPUT END ---
+
+Normalized Text Length: 361
+Course 23CS4401 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[1IL|]/g
+Course 23CS4402 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[2Zz]/g
+Course 23CS4403 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[3E58]/g
+Course 23CS4404 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[4A]/g
+Course 23CS4405 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[5S]/g
+Course 23CS4L01 FOUND at 190
+  -> Matched Grade: O
+Course 23CS4L02 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[C(][^A-Z0-9]*[S5$][^A-Z0-9]*[4A][^A-Z0-9]*[L1I|][^A-Z0-9]*[0OQD][^A-Z0-9]*[2Zz]/g
+Course 23SD4XXX NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[S5$][^A-Z0-9]*[D0O][^A-Z0-9]*[4A][^A-Z0-9]*X[^A-Z0-9]*X[^A-Z0-9]*X/g
+Course 23PL4004 NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*P[^A-Z0-9]*[L1I|][^A-Z0-9]*[4A][^A-Z0-9]*[0OQD][^A-Z0-9]*[0OQD][^A-Z0-9]*[4A]/g
+Course 23IN4XXX NOT FOUND with regex /[2Zz][^A-Z0-9]*[3E58][^A-Z0-9]*[I1L|][^A-Z0-9]*N[^A-Z0-9]*[4A][^A-Z0-9]*X[^A-Z0-9]*X[^A-Z0-9]*X/g
+
+Final Results: { '23CS4L01': 'O' }

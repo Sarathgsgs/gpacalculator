@@ -1,0 +1,37 @@
+﻿Reading mock output from: E:\Projects\CGPA CALC\academiacalc\ocr_debug_utf8.txt
+
+--- PROCESSING TEXT ---
+Normalized Text Length: 1876
+Course 23CS4401 FOUND at 611
+  -> Matched Grade: B+
+Course 23CS4402 FOUND at 738
+  -> Matched Grade: A
+Course 23CS4403 FOUND at 861
+  -> Matched Grade: A
+Course 23CS4404 FOUND at 984
+  -> Matched Grade: A
+Course 23CS4405 FOUND at 1107
+  -> Matched Grade: A
+Course 23CS4L01 FOUND at 368
+  -> Matched Grade: B+
+Course 23CS4L02 FOUND at 1361
+  -> Matched Grade: A
+Course 23SD4XXX FOUND at 1488
+  -> Matched Grade: A
+Course 23PL4004 FOUND at 1608
+  -> Matched Grade: A
+Course 23IN4XXX FOUND at 1738
+  -> Matched Grade: A
+
+Final Results: {
+  '23CS4401': 'B+',
+  '23CS4402': 'A',
+  '23CS4403': 'A',
+  '23CS4404': 'A',
+  '23CS4405': 'A',
+  '23CS4L01': 'B+',
+  '23CS4L02': 'A',
+  '23SD4XXX': 'A',
+  '23PL4004': 'A',
+  '23IN4XXX': 'A'
+}

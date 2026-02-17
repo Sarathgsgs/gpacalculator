@@ -33,6 +33,8 @@ export default function Footer() {
           <span>No tracking</span>
           <span className="mx-2 opacity-50">•</span>
           <span>No student data stored</span>
+          <span className="mx-2 opacity-50">•</span>
+          <a href="/benchmark" className="hover:text-white transition-colors">Admin</a>
         </div>
       </div>
     </footer>
