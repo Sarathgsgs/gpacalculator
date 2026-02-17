@@ -7,6 +7,7 @@ import Cgpa from "./app/routes/Cgpa.js";
 import Navbar from "./app/layout/Navbar.js";
 import Footer from "./app/layout/Footer.js";
 import { ErrorBoundary } from "./components/ErrorBoundary.js";
+import OcrBenchmark from "./components/OcrBenchmark.js";
 
 export default function App() {
   return (

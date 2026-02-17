@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import type { SemesterEntry } from "../utils/types.js";
 import { computeDetailedCgpa, round2 } from "../utils/grading.js";
+import CgpaResultModal from "./CgpaResultModal";
 
 function NumberField({
   label,
@@ -33,10 +34,12 @@ export default function DetailedCgpa() {
   const [credits, setCredits] = useState("");
   const [entries, setEntries] = useState<SemesterEntry[]>([]);
 
-  const cgpa = useMemo(() => {
-    const val = computeDetailedCgpa(entries);
-    return val === null ? null : round2(val);
-  }, [entries]);
+  // modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalCgpa, setModalCgpa] = useState(0);
+
+  const cgpaRaw = useMemo(() => computeDetailedCgpa(entries), [entries]);
+  const cgpa = useMemo(() => (cgpaRaw === null ? null : round2(cgpaRaw)), [cgpaRaw]);
 
   const add = () => {
     const semester = Number(sem);
@@ -48,7 +51,6 @@ export default function DetailedCgpa() {
     if (!Number.isFinite(creditsNum) || creditsNum < 0) return;
 
     setEntries((prev) => {
-      // Replace if semester exists
       const filtered = prev.filter((e) => e.semester !== semester);
       return [...filtered, { semester, gpa: gpaNum, credits: creditsNum }].sort(
         (a, b) => a.semester - b.semester
@@ -58,13 +60,18 @@ export default function DetailedCgpa() {
     setSem("");
     setGpa("");
     setCredits("");
+    setModalOpen(false);
   };
 
   const remove = (semester: number) => {
     setEntries((prev) => prev.filter((e) => e.semester !== semester));
+    setModalOpen(false);
   };
 
-  const clearAll = () => setEntries([]);
+  const clearAll = () => {
+    setEntries([]);
+    setModalOpen(false);
+  };
 
   return (
     <section className="rounded-3xl border border-border/70 bg-panel/40 p-6 shadow-glow">
@@ -76,13 +83,33 @@ export default function DetailedCgpa() {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={clearAll}
-          className="rounded-2xl bg-white/5 px-4 py-2 text-sm font-semibold text-text ring-1 ring-border hover:bg-white/10"
-        >
-          Clear all
-        </button>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <button
+            type="button"
+            disabled={cgpaRaw === null}
+            onClick={() => {
+              if (cgpaRaw === null) return;
+              setModalCgpa(cgpaRaw);
+              setModalOpen(true);
+            }}
+            className={[
+              "rounded-2xl px-4 py-2 text-sm font-semibold ring-1",
+              cgpaRaw === null
+                ? "cursor-not-allowed bg-white/10 text-muted ring-border"
+                : "bg-accent text-bg ring-accent/30 shadow-glow hover:brightness-110"
+            ].join(" ")}
+          >
+            View Result
+          </button>
+
+          <button
+            type="button"
+            onClick={clearAll}
+            className="rounded-2xl bg-white/5 px-4 py-2 text-sm font-semibold text-text ring-1 ring-border hover:bg-white/10"
+          >
+            Clear all
+          </button>
+        </div>
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-4 md:items-end">
@@ -145,6 +172,8 @@ export default function DetailedCgpa() {
           </div>
         )}
       </div>
+
+      <CgpaResultModal open={modalOpen} cgpa={modalCgpa} onClose={() => setModalOpen(false)} />
     </section>
   );
 }

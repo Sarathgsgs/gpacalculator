@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import SemesterSelect from "../../components/SemesterSelect.js";
-import CourseCardRow from "../../components/CourseCardRow.js";
-import Disclaimer from "../../components/Disclaimer.js";
-import GpaResultModal from "../../components/GpaResultModal.js";
-import type { Course, CoursesApiResponse, GradeMap } from "../../utils/types.js";
-import { computeGpa, createEmptyGradeMap, round2 } from "../../utils/grading.js";
+import SemesterSelect from "../../components/SemesterSelect";
+import CourseCardRow from "../../components/CourseCardRow";
+import Disclaimer from "../../components/Disclaimer";
+import GpaResultModal from "../../components/GpaResultModal";
+import OcrGradeImport from "../../components/OcrGradeImport";
+
+import type { Course, CoursesApiResponse, Grade, GradeMap } from "../../utils/types";
+import { computeGpa, createEmptyGradeMap, round2 } from "../../utils/grading";
 
 function StatPill({ label, value }: { label: string; value: React.ReactNode }) {
   return (
@@ -13,6 +15,24 @@ function StatPill({ label, value }: { label: string; value: React.ReactNode }) {
       <div className="mt-1 text-sm font-semibold text-text">{value}</div>
     </div>
   );
+}
+
+function getDisplayRank(c: Course): number {
+  const type = (c.type || "").toLowerCase().trim();
+  const isNonCredit = !c.isCredit || c.credits <= 0;
+  if (isNonCredit) return 100; // always last
+
+  const isLab = type.includes("lab");
+  if (isLab) return 90; // labs near bottom (but before non-credit)
+
+  // Main subject order (top to bottom)
+  if (type.includes("theory")) return 0;
+  if (type.includes("core")) return 1;
+  if (type.includes("internship")) return 2;
+  if (type.includes("skill")) return 3;
+  if (type.includes("value added")) return 4;
+
+  return 5; // other credit types
 }
 
 export default function Gpa() {
@@ -40,14 +60,12 @@ export default function Gpa() {
   // Require ALL CREDIT courses graded before enabling calculate
   const canCalculate = totalCreditCount > 0 && gradedCreditCount === totalCreditCount;
 
-  // Sorted list for display - by credits (high to low), then by course code
+  // Sorted list for display
   const displayCourses = useMemo(() => {
     return [...courses].sort((a, b) => {
-      // Sort by credits descending (highest first)
-      if (a.credits !== b.credits) {
-        return b.credits - a.credits;
-      }
-      // Secondary sort by course code
+      const ra = getDisplayRank(a);
+      const rb = getDisplayRank(b);
+      if (ra !== rb) return ra - rb;
       return a.courseCode.localeCompare(b.courseCode);
     });
   }, [courses]);
@@ -89,8 +107,8 @@ export default function Gpa() {
     };
   }, [semester]);
 
-  const onGradeChange = (courseCode: string, grade: any) => {
-    setGrades((prev: GradeMap) => ({ ...prev, [courseCode]: grade }));
+  const onGradeChange = (courseCode: string, grade: Grade) => {
+    setGrades((prev) => ({ ...prev, [courseCode]: grade }));
     setComputed(null);
     setModalOpen(false);
   };
@@ -111,8 +129,23 @@ export default function Gpa() {
     const gpaRounded = round2(result.gpa);
     setComputed(gpaRounded);
 
-    setModalGpa(result.gpa);
+    setModalGpa(result.gpa); // keep unrounded internally
     setModalOpen(true);
+  };
+
+  // OCR apply: merge found grades into current grade map
+  const onApplyOcr = (found: Record<string, Grade>) => {
+    setGrades((prev) => {
+      const next: GradeMap = { ...prev };
+      for (const [code, g] of Object.entries(found)) {
+        // only apply to courses that exist in this semester grade map
+        if (code in next) next[code] = g;
+      }
+      return next;
+    });
+
+    setComputed(null);
+    setModalOpen(false);
   };
 
   return (
@@ -154,6 +187,9 @@ export default function Gpa() {
           }
         />
       </div>
+
+      {/* OCR Import (runs locally in browser) */}
+      <OcrGradeImport courses={courses} onApply={onApplyOcr} />
 
       {/* Course List */}
       <div className="mt-6 grid gap-3">
