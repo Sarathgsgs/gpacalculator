@@ -188,8 +188,8 @@ export default function Gpa() {
         />
       </div>
 
-      {/* OCR Import (runs locally in browser) */}
-      <OcrGradeImport courses={courses} onApply={onApplyOcr} />
+      {/* OCR Import (runs locally in browser) - DISABLED FOR NOW */}
+      {/* <OcrGradeImport courses={courses} onApply={onApplyOcr} /> */}
 
       {/* Course List */}
       <div className="mt-6 grid gap-3">

@@ -21,7 +21,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/gpa" element={<Gpa />} />
               <Route path="/cgpa" element={<Cgpa />} />
-              <Route path="/benchmark" element={<OcrBenchmark />} />
+              {/* <Route path="/benchmark" element={<OcrBenchmark />} /> */}
 
               {/* fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
